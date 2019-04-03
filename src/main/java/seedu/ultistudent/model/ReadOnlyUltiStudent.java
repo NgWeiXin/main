@@ -6,18 +6,12 @@ import seedu.ultistudent.model.cap.CapEntry;
 import seedu.ultistudent.model.cap.ModuleSemester;
 import seedu.ultistudent.model.homework.Homework;
 import seedu.ultistudent.model.note.Note;
-import seedu.ultistudent.model.person.Person;
+
 
 /**
  * Unmodifiable view of an UltiStudent
  */
 public interface ReadOnlyUltiStudent extends Observable {
-
-    /**
-     * Returns an unmodifiable view of the persons list.
-     * This list will not contain any duplicate persons.
-     */
-    ObservableList<Person> getPersonList();
 
     /**
      * Returns an unmodifiable view of the cap entries list.
