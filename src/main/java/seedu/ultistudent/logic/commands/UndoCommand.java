@@ -1,7 +1,6 @@
 package seedu.ultistudent.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.ultistudent.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.ultistudent.logic.CommandHistory;
 import seedu.ultistudent.logic.commands.exceptions.CommandException;
@@ -25,7 +24,10 @@ public class UndoCommand extends Command {
         }
 
         model.undoUltiStudent();
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredCapEntryList(Model.PREDICATE_SHOW_ALL_CAP_ENTRIES);
+        model.updateFilteredModuleSemesterList(Model.PREDICATE_SHOW_ALL_MODULE_SEMESTERS);
+        model.updateFilteredHomeworkList(Model.PREDICATE_SHOW_ALL_HOMEWORK);
+        model.updateFilteredNoteList(Model.PREDICATE_SHOW_ALL_NOTES);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

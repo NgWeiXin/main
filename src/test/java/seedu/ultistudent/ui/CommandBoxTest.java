@@ -10,7 +10,6 @@ import org.junit.Test;
 import guitests.guihandles.CommandBoxHandle;
 import javafx.scene.input.KeyCode;
 import seedu.ultistudent.logic.commands.CommandResult;
-import seedu.ultistudent.logic.commands.ListCommand;
 import seedu.ultistudent.logic.commands.exceptions.CommandException;
 
 public class CommandBoxTest extends GuiUnitTest {

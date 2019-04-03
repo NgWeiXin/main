@@ -11,7 +11,7 @@ import seedu.ultistudent.model.Model;
  */
 public class ListCapEntryCommand extends Command {
 
-    public static final String COMMAND_WORD = "listCapEntry";
+    public static final String COMMAND_WORD = "list-CapEntry";
 
     public static final String MESSAGE_SUCCESS = "Listed all cap entries";
 

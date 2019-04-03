@@ -8,7 +8,6 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-import seedu.ultistudent.logic.commands.FindCommand;
 import seedu.ultistudent.model.person.NameContainsKeywordsPredicate;
 
 public class FindCommandParserTest {

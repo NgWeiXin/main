@@ -45,8 +45,8 @@ public class EditCapEntryByModuleCodeCommand extends Command {
     private final EditCapEntryDescriptor editCapEntryDescriptor;
 
     /**
-     * @param moduleCode of the person in the filtered person list to edit
-     * @param editCapEntryDescriptor details to edit the person with
+     * @param moduleCode of the cap entry in the filtered cap entry list to edit
+     * @param editCapEntryDescriptor details to edit the cap entry with
      */
     public EditCapEntryByModuleCodeCommand(ModuleCode moduleCode, EditCapEntryDescriptor editCapEntryDescriptor) {
         requireNonNull(moduleCode);
@@ -106,8 +106,8 @@ public class EditCapEntryByModuleCodeCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code CapEntry} with the details of {@code capEntryToEdit}
+     * edited with {@code editCapEntryDescriptor}.
      */
     private static CapEntry createEditedCapEntry(CapEntry capEntryToEdit,
                                                  EditCapEntryDescriptor editCapEntryDescriptor) {
@@ -143,8 +143,8 @@ public class EditCapEntryByModuleCodeCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the CapEntry with. Each non-empty field value will replace the
+     * corresponding field value of the CapEntry.
      */
     public static class EditCapEntryDescriptor {
         private ModuleCode moduleCode;

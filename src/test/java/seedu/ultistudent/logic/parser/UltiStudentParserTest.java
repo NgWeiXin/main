@@ -16,10 +16,8 @@ import org.junit.rules.ExpectedException;
 
 import seedu.ultistudent.logic.commands.ClearCommand;
 import seedu.ultistudent.logic.commands.ExitCommand;
-import seedu.ultistudent.logic.commands.FindCommand;
 import seedu.ultistudent.logic.commands.HelpCommand;
 import seedu.ultistudent.logic.commands.HistoryCommand;
-import seedu.ultistudent.logic.commands.ListCommand;
 import seedu.ultistudent.logic.commands.RedoCommand;
 import seedu.ultistudent.logic.commands.UndoCommand;
 import seedu.ultistudent.logic.parser.exceptions.ParseException;

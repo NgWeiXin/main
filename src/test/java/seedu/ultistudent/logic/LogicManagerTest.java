@@ -21,7 +21,6 @@ import org.junit.rules.TemporaryFolder;
 import seedu.ultistudent.logic.commands.AddCommand;
 import seedu.ultistudent.logic.commands.CommandResult;
 import seedu.ultistudent.logic.commands.HistoryCommand;
-import seedu.ultistudent.logic.commands.ListCommand;
 import seedu.ultistudent.logic.commands.exceptions.CommandException;
 import seedu.ultistudent.logic.parser.exceptions.ParseException;
 import seedu.ultistudent.model.Model;

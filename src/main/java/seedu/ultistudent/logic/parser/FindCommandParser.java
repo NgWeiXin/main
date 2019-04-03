@@ -4,7 +4,6 @@ import static seedu.ultistudent.commons.core.Messages.MESSAGE_INVALID_COMMAND_FO
 
 import java.util.Arrays;
 
-import seedu.ultistudent.logic.commands.FindCommand;
 import seedu.ultistudent.logic.parser.exceptions.ParseException;
 import seedu.ultistudent.model.person.NameContainsKeywordsPredicate;
 
