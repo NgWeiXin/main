@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import seedu.ultistudent.logic.LogicManager;
 import seedu.ultistudent.model.ModelManager;
-import seedu.ultistudent.storage.JsonAddressBookStorage;
+import seedu.ultistudent.storage.JsonUltiStudentStorage;
 import seedu.ultistudent.storage.JsonUserPrefsStorage;
 import seedu.ultistudent.storage.StorageManager;
 
@@ -34,7 +34,7 @@ public class MainWindowCloseTest extends GuiUnitTest {
 
     @Before
     public void setUp() throws Exception {
-        JsonAddressBookStorage jsonAddressBookStorage = new JsonAddressBookStorage(temporaryFolder.newFile().toPath());
+        JsonUltiStudentStorage jsonAddressBookStorage = new JsonUltiStudentStorage(temporaryFolder.newFile().toPath());
         JsonUserPrefsStorage jsonUserPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.newFile().toPath());
         StorageManager storageManager = new StorageManager(jsonAddressBookStorage, jsonUserPrefsStorage);
         FxToolkit.setupStage(stage -> {

@@ -13,14 +13,14 @@ import seedu.ultistudent.model.note.NoteName;
  * Jackson-friendly version of {@link Note}.
  */
 public class JsonAdaptedNote {
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Cap Entry's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Note's %s field is missing!";
 
     private final String moduleCode;
     private final String noteName;
     private final String content;
 
     /**
-     * Constructs a {@code JsonAdaptedNote} with the given person details.
+     * Constructs a {@code JsonAdaptedNote} with the given note details.
      */
     @JsonCreator
     public JsonAdaptedNote(@JsonProperty("modulecode") String moduleCode,
@@ -41,9 +41,9 @@ public class JsonAdaptedNote {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code CapEntry} object.
+     * Converts this Jackson-friendly adapted Note object into the model's {@code Note} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted cap entry.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted note.
      */
     public Note toModelType() throws IllegalValueException {
 
@@ -69,12 +69,9 @@ public class JsonAdaptedNote {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Content.class.getSimpleName()));
         }
-        //if (!Content.isValidNoteContent(content)) {
-        //    throw new IllegalValueException(Content.MESSAGE_CONSTRAINTS);
-        //}
+
         final Content modelContent = new Content(content);
 
-        //final Set<Tag> modelTags = new HashSet<>(capEntryTags);
         return new Note(modelModuleCode, modelNoteName, modelContent);
     }
 }

@@ -22,8 +22,8 @@ import seedu.ultistudent.model.ReadOnlyUltiStudent;
 import seedu.ultistudent.model.ReadOnlyUserPrefs;
 import seedu.ultistudent.model.UserPrefs;
 import seedu.ultistudent.model.util.SampleDataUtil;
-import seedu.ultistudent.storage.AddressBookStorage;
-import seedu.ultistudent.storage.JsonAddressBookStorage;
+import seedu.ultistudent.storage.JsonUltiStudentStorage;
+import seedu.ultistudent.storage.UltiStudentStorage;
 import seedu.ultistudent.storage.JsonUserPrefsStorage;
 import seedu.ultistudent.storage.Storage;
 import seedu.ultistudent.storage.StorageManager;
@@ -56,8 +56,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getUltiStudentFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        UltiStudentStorage ultiStudentStorage = new JsonUltiStudentStorage(userPrefs.getUltiStudentFilePath());
+        storage = new StorageManager(ultiStudentStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -77,7 +77,7 @@ public class MainApp extends Application {
         Optional<ReadOnlyUltiStudent> addressBookOptional;
         ReadOnlyUltiStudent initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
+            addressBookOptional = storage.readUltiStudent();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample UltiStudent");
             }

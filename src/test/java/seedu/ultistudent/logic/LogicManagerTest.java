@@ -29,7 +29,7 @@ import seedu.ultistudent.model.ModelManager;
 import seedu.ultistudent.model.ReadOnlyUltiStudent;
 import seedu.ultistudent.model.UserPrefs;
 import seedu.ultistudent.model.person.Person;
-import seedu.ultistudent.storage.JsonAddressBookStorage;
+import seedu.ultistudent.storage.JsonUltiStudentStorage;
 import seedu.ultistudent.storage.JsonUserPrefsStorage;
 import seedu.ultistudent.storage.StorageManager;
 import seedu.ultistudent.testutil.PersonBuilder;
@@ -49,7 +49,7 @@ public class LogicManagerTest {
 
     @Before
     public void setUp() throws Exception {
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(temporaryFolder.newFile().toPath());
+        JsonUltiStudentStorage addressBookStorage = new JsonUltiStudentStorage(temporaryFolder.newFile().toPath());
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.newFile().toPath());
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
@@ -78,9 +78,9 @@ public class LogicManagerTest {
 
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() throws Exception {
-        // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.newFile().toPath());
+        // Setup LogicManager with JsonUltiStudentIoExceptionThrowingStub
+        JsonUltiStudentStorage addressBookStorage =
+                new JsonUltiStudentIoExceptionThrowingStub(temporaryFolder.newFile().toPath());
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.newFile().toPath());
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
@@ -176,13 +176,13 @@ public class LogicManagerTest {
     /**
      * A stub class to throw an {@code IOException} when the save method is called.
      */
-    private static class JsonAddressBookIoExceptionThrowingStub extends JsonAddressBookStorage {
-        private JsonAddressBookIoExceptionThrowingStub(Path filePath) {
+    private static class JsonUltiStudentIoExceptionThrowingStub extends JsonUltiStudentStorage {
+        private JsonUltiStudentIoExceptionThrowingStub(Path filePath) {
             super(filePath);
         }
 
         @Override
-        public void saveAddressBook(ReadOnlyUltiStudent addressBook, Path filePath) throws IOException {
+        public void saveUltiStudent(ReadOnlyUltiStudent ultiStudent, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

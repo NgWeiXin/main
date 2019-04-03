@@ -14,7 +14,7 @@ import seedu.ultistudent.model.Model;
 import seedu.ultistudent.model.ModelManager;
 import seedu.ultistudent.model.ReadOnlyUltiStudent;
 import seedu.ultistudent.model.UserPrefs;
-import seedu.ultistudent.storage.JsonAddressBookStorage;
+import seedu.ultistudent.storage.JsonUltiStudentStorage;
 import seedu.ultistudent.storage.UserPrefsStorage;
 import seedu.ultistudent.testutil.TestUtil;
 import systemtests.ModelHelper;
@@ -42,9 +42,9 @@ public class TestApp extends MainApp {
 
         // If some initial local data has been provided, write those to the file
         if (initialDataSupplier.get() != null) {
-            JsonAddressBookStorage jsonAddressBookStorage = new JsonAddressBookStorage(saveFileLocation);
+            JsonUltiStudentStorage jsonAddressBookStorage = new JsonUltiStudentStorage(saveFileLocation);
             try {
-                jsonAddressBookStorage.saveAddressBook(initialDataSupplier.get());
+                jsonAddressBookStorage.saveUltiStudent(initialDataSupplier.get());
             } catch (IOException ioe) {
                 throw new AssertionError(ioe);
             }
@@ -73,7 +73,7 @@ public class TestApp extends MainApp {
      */
     public UltiStudent readStorageAddressBook() {
         try {
-            return new UltiStudent(storage.readAddressBook().get());
+            return new UltiStudent(storage.readUltiStudent().get());
         } catch (DataConversionException dce) {
             throw new AssertionError("Data is not in the UltiStudent format.", dce);
         } catch (IOException ioe) {
@@ -85,7 +85,7 @@ public class TestApp extends MainApp {
      * Returns the file path of the storage file.
      */
     public Path getStorageSaveLocation() {
-        return storage.getAddressBookFilePath();
+        return storage.getUltiStudentFilePath();
     }
 
     /**

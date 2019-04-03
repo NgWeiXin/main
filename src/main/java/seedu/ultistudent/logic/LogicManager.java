@@ -61,7 +61,7 @@ public class LogicManager implements Logic {
         if (addressBookModified) {
             logger.info("UltiStudent modified, saving to file.");
             try {
-                storage.saveAddressBook(model.getUltiStudent());
+                storage.saveUltiStudent(model.getUltiStudent());
             } catch (IOException ioe) {
                 throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
             }

@@ -10,12 +10,12 @@ import seedu.ultistudent.model.cap.ModuleSemester;
  * Jackson-friendly version of {@link seedu.ultistudent.model.cap.ModuleSemester}.
  */
 public class JsonAdaptedModuleSemester {
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Cap Entry's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "ModuleSemester's %s field is missing!";
 
     private final String moduleSemester;
 
     /**
-     * Constructs a {@code JsonAdaptedCapEntry} with the given person details.
+     * Constructs a {@code JsonAdaptedModuleSemester} with the given module semester details.
      */
     @JsonCreator
     public JsonAdaptedModuleSemester(@JsonProperty("moduleSemester") String moduleSemester) {
@@ -23,16 +23,16 @@ public class JsonAdaptedModuleSemester {
     }
 
     /**
-     * Converts a given {@code CapEntry} into this class for Jackson use.
+     * Converts a given {@code ModuleSemester} into this class for Jackson use.
      */
     public JsonAdaptedModuleSemester(ModuleSemester source) {
         moduleSemester = source.value;
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code CapEntry} object.
+     * Converts this Jackson-friendly adapted ModuleSemester object into the model's {@code ModuleSemester} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted cap entry.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted module semester.
      */
     public ModuleSemester toModelType() throws IllegalValueException {
 

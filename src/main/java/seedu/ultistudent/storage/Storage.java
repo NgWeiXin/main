@@ -12,7 +12,7 @@ import seedu.ultistudent.model.UserPrefs;
 /**
  * API of the Storage component
  */
-public interface Storage extends AddressBookStorage, UserPrefsStorage {
+public interface Storage extends UltiStudentStorage, UserPrefsStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
@@ -21,12 +21,12 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
     void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException;
 
     @Override
-    Path getAddressBookFilePath();
+    Path getUltiStudentFilePath();
 
     @Override
-    Optional<ReadOnlyUltiStudent> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyUltiStudent> readUltiStudent() throws DataConversionException, IOException;
 
     @Override
-    void saveAddressBook(ReadOnlyUltiStudent addressBook) throws IOException;
+    void saveUltiStudent(ReadOnlyUltiStudent ultiStudent) throws IOException;
 
 }

@@ -22,7 +22,7 @@ public class JsonAdaptedCapEntry {
     private final String moduleSemester;
 
     /**
-     * Constructs a {@code JsonAdaptedCapEntry} with the given person details.
+     * Constructs a {@code JsonAdaptedCapEntry} with the given cap entry details.
      */
     @JsonCreator
     public JsonAdaptedCapEntry(@JsonProperty("modulecode") String moduleCode,
@@ -46,7 +46,7 @@ public class JsonAdaptedCapEntry {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code CapEntry} object.
+     * Converts this Jackson-friendly adapted CapEntry object into the model's {@code CapEntry} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted cap entry.
      */

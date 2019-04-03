@@ -23,7 +23,7 @@ public class JsonAdaptedHomeworkList {
     //private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedHomeworkList} with the given homework details.
      */
     @JsonCreator
     public JsonAdaptedHomeworkList(@JsonProperty("homeworkName") String homeworkName,
@@ -34,7 +34,7 @@ public class JsonAdaptedHomeworkList {
         this.date = date;
     }
     /**
-     * Converts a given {@code Person} into this class for Jackson use.
+     * Converts a given {@code Homework} into this class for Jackson use.
      */
     public JsonAdaptedHomeworkList(Homework source) {
         this.moduleCode = source.getModuleCode().value;
@@ -43,9 +43,9 @@ public class JsonAdaptedHomeworkList {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted homework object into the model's {@code Homework} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted homework.
      */
     public Homework toModelType() throws IllegalValueException {
         if (moduleCode == null) {
