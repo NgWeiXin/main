@@ -11,7 +11,7 @@ import seedu.ultistudent.model.person.Person;
 /**
  * Unmodifiable view of an UltiStudent
  */
-public interface ReadOnlyAddressBook extends Observable {
+public interface ReadOnlyUltiStudent extends Observable {
 
     /**
      * Returns an unmodifiable view of the persons list.

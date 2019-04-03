@@ -6,7 +6,7 @@ import java.util.Date;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
-import seedu.ultistudent.model.ReadOnlyAddressBook;
+import seedu.ultistudent.model.ReadOnlyUltiStudent;
 
 /**
  * A ui for the status bar that is displayed at the footer of the application.
@@ -34,7 +34,7 @@ public class StatusBarFooter extends UiPart<Region> {
     private Label currentManager;
 
 
-    public StatusBarFooter(String manager, ReadOnlyAddressBook addressBook) {
+    public StatusBarFooter(String manager, ReadOnlyUltiStudent addressBook) {
         super(FXML);
         addressBook.addListener(observable -> updateSyncStatus());
         syncStatus.setText(SYNC_STATUS_INITIAL);

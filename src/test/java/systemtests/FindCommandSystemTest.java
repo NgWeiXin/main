@@ -63,7 +63,7 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
 //
 //        /* Case: find same persons in UltiStudent after deleting 1 of them -> 1 person found */
 //        executeCommand(DeleteCommand.COMMAND_WORD + " 1");
-//        assertFalse(getModel().getAddressBook().getPersonList().contains(BENSON));
+//        assertFalse(getModel().getUltiStudent().getPersonList().contains(BENSON));
 //        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
 //        expectedModel = getModel();
 //        ModelHelper.setFilteredList(expectedModel, DANIEL);

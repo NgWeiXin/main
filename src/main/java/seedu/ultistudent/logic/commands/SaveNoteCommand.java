@@ -34,7 +34,7 @@ public class SaveNoteCommand extends Command {
         Note oldNote = model.getFilteredNoteList().get(indexOfOldNote);
         model.setNote(oldNote, editedNote);
         model.updateFilteredNoteList(Model.PREDICATE_SHOW_ALL_NOTES);
-        model.commitAddressBook();
+        model.commitUltiStudent();
 
         return new CommandResult(String.format(MESSAGE_SAVE_NOTE_SUCCESS, editedNote));
     }

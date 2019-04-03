@@ -9,8 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.ultistudent.commons.exceptions.IllegalValueException;
-import seedu.ultistudent.model.AddressBook;
-import seedu.ultistudent.model.ReadOnlyAddressBook;
+import seedu.ultistudent.model.UltiStudent;
+import seedu.ultistudent.model.ReadOnlyUltiStudent;
 
 import seedu.ultistudent.model.cap.CapEntry;
 import seedu.ultistudent.model.cap.ModuleSemester;
@@ -18,7 +18,7 @@ import seedu.ultistudent.model.homework.Homework;
 import seedu.ultistudent.model.note.Note;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable UltiStudent that is serializable to JSON format.
  */
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
@@ -51,11 +51,11 @@ class JsonSerializableAddressBook {
     }
 
     /**
-     * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
+     * Converts a given {@code ReadOnlyUltiStudent} into this class for Jackson use.
      *
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
-    public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
+    public JsonSerializableAddressBook(ReadOnlyUltiStudent source) {
         capEntryList.addAll(source.getCapEntryList().stream().map(JsonAdaptedCapEntry::new)
                 .collect(Collectors.toList()));
         homeworkList.addAll(source.getHomeworkList().stream().map(JsonAdaptedHomeworkList::new)
@@ -66,12 +66,12 @@ class JsonSerializableAddressBook {
     }
 
     /**
-     * Converts this UltiStudent into the model's {@code AddressBook} object.
+     * Converts this UltiStudent into the model's {@code UltiStudent} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
+    public UltiStudent toModelType() throws IllegalValueException {
+        UltiStudent addressBook = new UltiStudent();
 
         for (JsonAdaptedCapEntry jsonAdaptedCapEntry : capEntryList) {
             CapEntry capEntry = jsonAdaptedCapEntry.toModelType();

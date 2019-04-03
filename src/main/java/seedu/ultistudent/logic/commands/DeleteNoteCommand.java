@@ -44,7 +44,7 @@ public class DeleteNoteCommand extends Command {
 
         Note noteToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteNote(noteToDelete);
-        model.commitAddressBook();
+        model.commitUltiStudent();
 
         return new CommandResult(String.format(MESSAGE_DELETE_NOTE_SUCCESS,
                 noteToDelete));

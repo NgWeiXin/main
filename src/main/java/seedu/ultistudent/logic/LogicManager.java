@@ -14,7 +14,7 @@ import seedu.ultistudent.logic.commands.exceptions.CommandException;
 import seedu.ultistudent.logic.parser.UltiStudentParser;
 import seedu.ultistudent.logic.parser.exceptions.ParseException;
 import seedu.ultistudent.model.Model;
-import seedu.ultistudent.model.ReadOnlyAddressBook;
+import seedu.ultistudent.model.ReadOnlyUltiStudent;
 import seedu.ultistudent.model.cap.CapEntry;
 import seedu.ultistudent.model.cap.ModuleSemester;
 import seedu.ultistudent.model.homework.Homework;
@@ -42,7 +42,7 @@ public class LogicManager implements Logic {
         ultiStudentParser = new UltiStudentParser();
 
         // Set addressBookModified to true whenever the models' UltiStudent is modified.
-        model.getAddressBook().addListener(observable -> addressBookModified = true);
+        model.getUltiStudent().addListener(observable -> addressBookModified = true);
     }
 
     @Override
@@ -61,7 +61,7 @@ public class LogicManager implements Logic {
         if (addressBookModified) {
             logger.info("UltiStudent modified, saving to file.");
             try {
-                storage.saveAddressBook(model.getAddressBook());
+                storage.saveAddressBook(model.getUltiStudent());
             } catch (IOException ioe) {
                 throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
             }
@@ -71,8 +71,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return model.getAddressBook();
+    public ReadOnlyUltiStudent getAddressBook() {
+        return model.getUltiStudent();
     }
 
     @Override
@@ -107,7 +107,7 @@ public class LogicManager implements Logic {
 
     @Override
     public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+        return model.getUltiStudentFilePath();
     }
 
     @Override

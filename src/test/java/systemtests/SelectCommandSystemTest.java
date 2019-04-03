@@ -42,7 +42,7 @@ public class SelectCommandSystemTest extends AddressBookSystemTest {
 //         * -> rejected
 //         */
 //        showPersonsWithName(KEYWORD_MATCHING_MEIER);
-//        int invalidIndex = getModel().getAddressBook().getPersonList().size();
+//        int invalidIndex = getModel().getUltiStudent().getPersonList().size();
 //        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 //
 //        /* Case: filtered person list, select index within bounds of UltiStudent and person list -> selected */

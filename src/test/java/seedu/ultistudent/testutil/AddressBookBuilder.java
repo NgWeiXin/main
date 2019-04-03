@@ -1,34 +1,34 @@
 package seedu.ultistudent.testutil;
 
-import seedu.ultistudent.model.AddressBook;
+import seedu.ultistudent.model.UltiStudent;
 import seedu.ultistudent.model.person.Person;
 
 /**
  * A utility class to help with building Addressbook objects.
  * Example usage: <br>
- *     {@code AddressBook ab = new AddressBookBuilder().withPerson("John", "Doe").build();}
+ *     {@code UltiStudent ab = new AddressBookBuilder().withPerson("John", "Doe").build();}
  */
 public class AddressBookBuilder {
 
-    private AddressBook addressBook;
+    private UltiStudent addressBook;
 
     public AddressBookBuilder() {
-        addressBook = new AddressBook();
+        addressBook = new UltiStudent();
     }
 
-    public AddressBookBuilder(AddressBook addressBook) {
+    public AddressBookBuilder(UltiStudent addressBook) {
         this.addressBook = addressBook;
     }
 
     /**
-     * Adds a new {@code Person} to the {@code AddressBook} that we are building.
+     * Adds a new {@code Person} to the {@code UltiStudent} that we are building.
      */
     public AddressBookBuilder withPerson(Person person) {
         addressBook.addPerson(person);
         return this;
     }
 
-    public AddressBook build() {
+    public UltiStudent build() {
         return addressBook;
     }
 }

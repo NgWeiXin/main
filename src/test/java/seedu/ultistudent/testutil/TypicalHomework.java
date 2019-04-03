@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.ultistudent.model.AddressBook;
+import seedu.ultistudent.model.UltiStudent;
 import seedu.ultistudent.model.homework.Homework;
 
 /**
@@ -56,10 +56,10 @@ public class TypicalHomework {
     private TypicalHomework() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical homework.
+     * Returns an {@code UltiStudent} with all the typical homework.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static UltiStudent getTypicalAddressBook() {
+        UltiStudent ab = new UltiStudent();
         for (Homework homework : getTypicalHomework()) {
             ab.addHomework(homework);
         }

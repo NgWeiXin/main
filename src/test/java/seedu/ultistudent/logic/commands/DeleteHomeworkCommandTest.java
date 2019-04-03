@@ -37,9 +37,9 @@ public class DeleteHomeworkCommandTest {
 
         String expectedMessage = String.format(DeleteHomeworkCommand.MESSAGE_DELETE_HOMEWORK_SUCCESS, homeworkToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getUltiStudent(), new UserPrefs());
         expectedModel.deleteHomework(homeworkToDelete);
-        expectedModel.commitAddressBook();
+        expectedModel.commitUltiStudent();
 
         assertCommandSuccess(deleteHomeworkCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -62,9 +62,9 @@ public class DeleteHomeworkCommandTest {
 
         String expectedMessage = String.format(DeleteHomeworkCommand.MESSAGE_DELETE_HOMEWORK_SUCCESS, homeworkToDelete);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getUltiStudent(), new UserPrefs());
         expectedModel.deleteHomework(homeworkToDelete);
-        expectedModel.commitAddressBook();
+        expectedModel.commitUltiStudent();
         showNoHomework(expectedModel);
 
         assertCommandSuccess(deleteHomeworkCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -76,7 +76,7 @@ public class DeleteHomeworkCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND_HOMEWORK;
         // ensures that outOfBoundIndex is still in bounds of UltiStudent list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getHomeworkList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getUltiStudent().getHomeworkList().size());
 
         DeleteHomeworkCommand deleteHomeworkCommand = new DeleteHomeworkCommand(outOfBoundIndex);
 
@@ -88,19 +88,19 @@ public class DeleteHomeworkCommandTest {
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Homework homeworkToDelete = model.getFilteredHomeworkList().get(INDEX_FIRST_HOMEWORK.getZeroBased());
         DeleteHomeworkCommand deleteHomeworkCommand = new DeleteHomeworkCommand(INDEX_FIRST_HOMEWORK);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getUltiStudent(), new UserPrefs());
         expectedModel.deleteHomework(homeworkToDelete);
-        expectedModel.commitAddressBook();
+        expectedModel.commitUltiStudent();
 
         // delete -> first person deleted
         deleteHomeworkCommand.execute(model, commandHistory);
 
         // undo -> reverts addressbook back to previous state and filtered person list to show all persons
-        expectedModel.undoAddressBook();
+        expectedModel.undoUltiStudent();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first person deleted again
-        expectedModel.redoAddressBook();
+        expectedModel.redoUltiStudent();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
@@ -128,26 +128,26 @@ public class DeleteHomeworkCommandTest {
     //    @Test
     //    public void executeUndoRedo_validIndexFilteredList_sameHomeworkDeleted() throws Exception {
     //        DeleteHomeworkCommand deleteHomeworkCommand = new DeleteHomeworkCommand(INDEX_FIRST_HOMEWORK);
-    //        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+    //        Model expectedModel = new ModelManager(model.getUltiStudent(), new UserPrefs());
     //
     //        showHomeworkAtIndex(model, INDEX_SECOND_HOMEWORK);
     //        Homework homeworkToDelete = model.getFilteredHomeworkList().get(INDEX_FIRST_HOMEWORK.getZeroBased());
     //        expectedModel.deleteHomework(homeworkToDelete);
-    //        expectedModel.commitAddressBook();
+    //        expectedModel.commitUltiStudent();
     //
     //        // delete -> deletes second homework in unfiltered homework list / first homework in
     //        filtered homework list
     //        deleteHomeworkCommand.execute(model, commandHistory);
     //
     //        // undo -> reverts addressbook back to previous state and filtered homework list to show all homework
-    //        expectedModel.undoAddressBook();
+    //        expectedModel.undoUltiStudent();
     //        assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS,
     //        expectedModel);
     //
     //        assertNotEquals(homeworkToDelete, model.getFilteredHomeworkList().
     //        get(INDEX_FIRST_HOMEWORK.getZeroBased()));
     //        // redo -> deletes same second homework in unfiltered homework list
-    //        expectedModel.redoAddressBook();
+    //        expectedModel.redoUltiStudent();
     //        assertCommandSuccess(new RedoCommand(), model, commandHistory,
     //        RedoCommand.MESSAGE_SUCCESS, expectedModel);
     //    }

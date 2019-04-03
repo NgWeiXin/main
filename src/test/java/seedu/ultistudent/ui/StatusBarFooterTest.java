@@ -18,7 +18,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import guitests.guihandles.StatusBarFooterHandle;
-import seedu.ultistudent.model.AddressBook;
+import seedu.ultistudent.model.UltiStudent;
 
 public class StatusBarFooterTest extends GuiUnitTest {
 
@@ -29,7 +29,7 @@ public class StatusBarFooterTest extends GuiUnitTest {
     private static final Clock injectedClock = Clock.fixed(Instant.now(), ZoneId.systemDefault());
 
     private StatusBarFooterHandle statusBarFooterHandle;
-    private final AddressBook addressBook = new AddressBook();
+    private final UltiStudent addressBook = new UltiStudent();
 
     @BeforeClass
     public static void setUpBeforeClass() {

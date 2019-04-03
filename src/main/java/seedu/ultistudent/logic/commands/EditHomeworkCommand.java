@@ -76,7 +76,7 @@ public class EditHomeworkCommand extends Command {
 
         model.setHomework(homeworkToEdit, editedHomework);
         model.updateFilteredHomeworkList(PREDICATE_SHOW_ALL_HOMEWORK);
-        model.commitAddressBook();
+        model.commitUltiStudent();
         return new CommandResult(String.format(MESSAGE_EDIT_HOMEWORK_SUCCESS, editedHomework));
     }
 

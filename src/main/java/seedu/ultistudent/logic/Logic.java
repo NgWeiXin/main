@@ -9,7 +9,7 @@ import seedu.ultistudent.logic.commands.CommandResult;
 import seedu.ultistudent.logic.commands.exceptions.CommandException;
 import seedu.ultistudent.logic.parser.exceptions.ParseException;
 import seedu.ultistudent.model.Model;
-import seedu.ultistudent.model.ReadOnlyAddressBook;
+import seedu.ultistudent.model.ReadOnlyUltiStudent;
 import seedu.ultistudent.model.cap.CapEntry;
 import seedu.ultistudent.model.cap.ModuleSemester;
 import seedu.ultistudent.model.homework.Homework;
@@ -30,11 +30,11 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns the UltiStudent.
      *
-     * @see seedu.ultistudent.model.Model#getAddressBook()
+     * @see seedu.ultistudent.model.Model#getUltiStudent()
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyUltiStudent getAddressBook();
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();

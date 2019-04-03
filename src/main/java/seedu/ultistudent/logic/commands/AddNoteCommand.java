@@ -48,7 +48,7 @@ public class AddNoteCommand extends Command {
         }
 
         model.addNote(toAdd);
-        model.commitAddressBook();
+        model.commitUltiStudent();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

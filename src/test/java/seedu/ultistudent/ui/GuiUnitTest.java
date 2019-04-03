@@ -10,7 +10,7 @@ import javafx.scene.Node;
 import seedu.ultistudent.ui.testutil.UiPartRule;
 
 /**
- * A GUI unit test class for AddressBook.
+ * A GUI unit test class for UltiStudent.
  */
 public abstract class GuiUnitTest {
     @Rule

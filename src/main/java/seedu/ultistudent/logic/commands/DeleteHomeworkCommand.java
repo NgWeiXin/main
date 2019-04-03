@@ -43,7 +43,7 @@ public class DeleteHomeworkCommand extends Command {
 
         Homework homeworkToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteHomework(homeworkToDelete);
-        model.commitAddressBook();
+        model.commitUltiStudent();
         return new CommandResult(String.format(MESSAGE_DELETE_HOMEWORK_SUCCESS, homeworkToDelete));
     }
 

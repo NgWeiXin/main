@@ -61,7 +61,7 @@ public class AddCapEntryCommand extends Command {
 
         model.addCapEntry(toAdd);
 
-        model.commitAddressBook();
+        model.commitUltiStudent();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

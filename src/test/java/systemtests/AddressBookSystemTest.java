@@ -33,14 +33,14 @@ import seedu.ultistudent.logic.commands.ClearCommand;
 import seedu.ultistudent.logic.commands.FindCommand;
 import seedu.ultistudent.logic.commands.ListCommand;
 import seedu.ultistudent.logic.commands.SelectCommand;
-import seedu.ultistudent.model.AddressBook;
+import seedu.ultistudent.model.UltiStudent;
 import seedu.ultistudent.model.Model;
 import seedu.ultistudent.testutil.TypicalPersons;
 import seedu.ultistudent.ui.BrowserPanel;
 import seedu.ultistudent.ui.CommandBox;
 
 /**
- * A system test class for AddressBook, which provides access to handles of GUI components and helper methods
+ * A system test class for UltiStudent, which provides access to handles of GUI components and helper methods
  * for test verification.
  */
 public abstract class AddressBookSystemTest {
@@ -78,7 +78,7 @@ public abstract class AddressBookSystemTest {
     /**
      * Returns the data to be loaded into the file in {@link #getDataFileLocation()}.
      */
-    protected AddressBook getInitialData() {
+    protected UltiStudent getInitialData() {
         return TypicalPersons.getTypicalAddressBook();
     }
 
@@ -137,7 +137,7 @@ public abstract class AddressBookSystemTest {
      */
     protected void showAllPersons() {
         executeCommand(ListCommand.COMMAND_WORD);
-        assertEquals(getModel().getAddressBook().getPersonList().size(), getModel().getFilteredPersonList().size());
+        assertEquals(getModel().getUltiStudent().getPersonList().size(), getModel().getFilteredPersonList().size());
     }
 
     /**
@@ -145,7 +145,7 @@ public abstract class AddressBookSystemTest {
      */
     protected void showPersonsWithName(String keyword) {
         executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
-        assertTrue(getModel().getFilteredPersonList().size() < getModel().getAddressBook().getPersonList().size());
+        assertTrue(getModel().getFilteredPersonList().size() < getModel().getUltiStudent().getPersonList().size());
     }
 
     /**
@@ -161,7 +161,7 @@ public abstract class AddressBookSystemTest {
      */
     protected void deleteAllPersons() {
         executeCommand(ClearCommand.COMMAND_WORD);
-        assertEquals(0, getModel().getAddressBook().getPersonList().size());
+        assertEquals(0, getModel().getUltiStudent().getPersonList().size());
     }
 
     /**
@@ -173,7 +173,7 @@ public abstract class AddressBookSystemTest {
             Model expectedModel) {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
         assertEquals(expectedResultMessage, getResultDisplay().getText());
-        assertEquals(new AddressBook(expectedModel.getAddressBook()), testApp.readStorageAddressBook());
+        assertEquals(new UltiStudent(expectedModel.getUltiStudent()), testApp.readStorageAddressBook());
         assertListMatching(getPersonListPanel(), expectedModel.getFilteredPersonList());
     }
 

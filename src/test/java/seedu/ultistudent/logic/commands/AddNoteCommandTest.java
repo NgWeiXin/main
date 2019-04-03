@@ -20,9 +20,9 @@ import javafx.collections.ObservableList;
 import seedu.ultistudent.commons.core.GuiSettings;
 import seedu.ultistudent.logic.CommandHistory;
 import seedu.ultistudent.logic.commands.exceptions.CommandException;
-import seedu.ultistudent.model.AddressBook;
+import seedu.ultistudent.model.UltiStudent;
 import seedu.ultistudent.model.Model;
-import seedu.ultistudent.model.ReadOnlyAddressBook;
+import seedu.ultistudent.model.ReadOnlyUltiStudent;
 import seedu.ultistudent.model.ReadOnlyUserPrefs;
 import seedu.ultistudent.model.cap.CapEntry;
 import seedu.ultistudent.model.cap.ModuleSemester;
@@ -120,12 +120,12 @@ public class AddNoteCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getUltiStudentFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setUltiStudentFilePath(Path ultiStudentFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -135,12 +135,12 @@ public class AddNoteCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setUltiStudent(ReadOnlyUltiStudent ultiStudent) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyUltiStudent getUltiStudent() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -170,27 +170,27 @@ public class AddNoteCommandTest {
         }
 
         @Override
-        public boolean canUndoAddressBook() {
+        public boolean canUndoUltiStudent() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean canRedoAddressBook() {
+        public boolean canRedoUltiStudent() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void undoAddressBook() {
+        public void undoUltiStudent() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void redoAddressBook() {
+        public void redoUltiStudent() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commitUltiStudent() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -433,13 +433,13 @@ public class AddNoteCommandTest {
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commitUltiStudent() {
             // called by {@code AddCommand#execute()}
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyUltiStudent getUltiStudent() {
+            return new UltiStudent();
         }
     }
 

@@ -10,7 +10,6 @@ import seedu.ultistudent.model.cap.CapEntry;
 import seedu.ultistudent.model.cap.ModuleSemester;
 import seedu.ultistudent.model.homework.Homework;
 import seedu.ultistudent.model.note.Note;
-import seedu.ultistudent.model.person.Person;
 
 /**
  * The API of the Model component.
@@ -19,7 +18,6 @@ public interface Model {
     /**
      * {@code Predicate} that always evaluate to true
      */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
     Predicate<CapEntry> PREDICATE_SHOW_ALL_CAP_ENTRIES = unused -> true;
     Predicate<Homework> PREDICATE_SHOW_ALL_HOMEWORK = unused -> true;
     Predicate<Note> PREDICATE_SHOW_ALL_NOTES = unused -> true;
@@ -48,100 +46,47 @@ public interface Model {
     /**
      * Returns the user prefs' UltiStudent file path.
      */
-    Path getAddressBookFilePath();
+    Path getUltiStudentFilePath();
 
     /**
      * Sets the user prefs' UltiStudent file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setUltiStudentFilePath(Path ultiStudentFilePath);
 
     /**
-     * Replaces UltiStudent data with the data in {@code addressBook}.
+     * Replaces UltiStudent data with the data in {@code ultiStudent}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setUltiStudent(ReadOnlyUltiStudent ultiStudent);
 
     /**
-     * Returns the AddressBook
+     * Returns the UltiStudent
      */
-    ReadOnlyAddressBook getAddressBook();
-
-    /**
-     * Returns true if a person with the same identity as {@code person} exists in the UltiStudent.
-     */
-    boolean hasPerson(Person person);
-
-    /**
-     * Deletes the given person.
-     * The person must exist in the UltiStudent.
-     */
-    void deletePerson(Person target);
-
-    /**
-     * Adds the given person.
-     * {@code person} must not already exist in the UltiStudent.
-     */
-    void addPerson(Person person);
-
-    /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the UltiStudent.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the UltiStudent.
-     */
-    void setPerson(Person target, Person editedPerson);
-
-    /**
-     * Returns an unmodifiable view of the filtered person list
-     */
-    ObservableList<Person> getFilteredPersonList();
-
-    /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
-     *
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    ReadOnlyUltiStudent getUltiStudent();
 
     /**
      * Returns true if the model has previous UltiStudent states to restore.
      */
-    boolean canUndoAddressBook();
+    boolean canUndoUltiStudent();
 
     /**
      * Returns true if the model has undone UltiStudent states to restore.
      */
-    boolean canRedoAddressBook();
+    boolean canRedoUltiStudent();
 
     /**
      * Restores the model's UltiStudent to its previous state.
      */
-    void undoAddressBook();
+    void undoUltiStudent();
 
     /**
      * Restores the model's UltiStudent to its previously undone state.
      */
-    void redoAddressBook();
+    void redoUltiStudent();
 
     /**
      * Saves the current UltiStudent state for undo/redo.
      */
-    void commitAddressBook();
-
-    /**
-     * Selected person in the filtered person list.
-     * null if no person is selected.
-     */
-    ReadOnlyProperty<Person> selectedPersonProperty();
-
-    /**
-     * Returns the selected person in the filtered person list.
-     * null if no person is selected.
-     */
-    Person getSelectedPerson();
-
-    /**
-     * Sets the selected person in the filtered person list.
-     */
-    void setSelectedPerson(Person person);
+    void commitUltiStudent();
 
     //=========== Cap Entry ===========================================================================
 

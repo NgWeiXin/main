@@ -35,7 +35,7 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
+        assertEquals(new UltiStudent(), new UltiStudent(modelManager.getUltiStudent()));
         assertEquals(null, modelManager.getSelectedPerson());
     }
 
@@ -75,14 +75,14 @@ public class ModelManagerTest {
     @Test
     public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        modelManager.setAddressBookFilePath(null);
+        modelManager.setUltiStudentFilePath(null);
     }
 
     @Test
     public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
         Path path = Paths.get("ultistudent/book/file/path");
-        modelManager.setAddressBookFilePath(path);
-        assertEquals(path, modelManager.getAddressBookFilePath());
+        modelManager.setUltiStudentFilePath(path);
+        assertEquals(path, modelManager.getUltiStudentFilePath());
     }
 
     @Test
@@ -151,8 +151,8 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
-        AddressBook differentAddressBook = new AddressBook();
+        UltiStudent addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        UltiStudent differentAddressBook = new UltiStudent();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true

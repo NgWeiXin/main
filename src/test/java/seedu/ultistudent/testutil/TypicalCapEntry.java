@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.ultistudent.model.AddressBook;
+import seedu.ultistudent.model.UltiStudent;
 import seedu.ultistudent.model.cap.CapEntry;
 
 /**
@@ -69,10 +69,10 @@ public class TypicalCapEntry {
     private TypicalCapEntry() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical cap entries.
+     * Returns an {@code UltiStudent} with all the typical cap entries.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static UltiStudent getTypicalAddressBook() {
+        UltiStudent ab = new UltiStudent();
         for (CapEntry capEntry : getTypicalCapEntryList()) {
             ab.addCapEntry(capEntry);
         }
