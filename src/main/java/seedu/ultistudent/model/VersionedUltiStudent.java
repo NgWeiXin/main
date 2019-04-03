@@ -8,14 +8,14 @@ import java.util.List;
  */
 public class VersionedUltiStudent extends UltiStudent {
 
-    private final List<ReadOnlyUltiStudent> addressBookStateList;
+    private final List<ReadOnlyUltiStudent> ultiStudentStateList;
     private int currentStatePointer;
 
     public VersionedUltiStudent(ReadOnlyUltiStudent initialState) {
         super(initialState);
 
-        addressBookStateList = new ArrayList<>();
-        addressBookStateList.add(new UltiStudent(initialState));
+        ultiStudentStateList = new ArrayList<>();
+        ultiStudentStateList.add(new UltiStudent(initialState));
         currentStatePointer = 0;
     }
 
@@ -25,13 +25,13 @@ public class VersionedUltiStudent extends UltiStudent {
      */
     public void commit() {
         removeStatesAfterCurrentPointer();
-        addressBookStateList.add(new UltiStudent(this));
+        ultiStudentStateList.add(new UltiStudent(this));
         currentStatePointer++;
         indicateModified();
     }
 
     private void removeStatesAfterCurrentPointer() {
-        addressBookStateList.subList(currentStatePointer + 1, addressBookStateList.size()).clear();
+        ultiStudentStateList.subList(currentStatePointer + 1, ultiStudentStateList.size()).clear();
     }
 
     /**
@@ -42,7 +42,7 @@ public class VersionedUltiStudent extends UltiStudent {
             throw new NoUndoableStateException();
         }
         currentStatePointer--;
-        resetData(addressBookStateList.get(currentStatePointer));
+        resetData(ultiStudentStateList.get(currentStatePointer));
     }
 
     /**
@@ -53,7 +53,7 @@ public class VersionedUltiStudent extends UltiStudent {
             throw new NoRedoableStateException();
         }
         currentStatePointer++;
-        resetData(addressBookStateList.get(currentStatePointer));
+        resetData(ultiStudentStateList.get(currentStatePointer));
     }
 
     /**
@@ -67,7 +67,7 @@ public class VersionedUltiStudent extends UltiStudent {
      * Returns true if {@code redo()} has UltiStudent states to redo.
      */
     public boolean canRedo() {
-        return currentStatePointer < addressBookStateList.size() - 1;
+        return currentStatePointer < ultiStudentStateList.size() - 1;
     }
 
     @Override
@@ -82,12 +82,12 @@ public class VersionedUltiStudent extends UltiStudent {
             return false;
         }
 
-        VersionedUltiStudent otherVersionedAddressBook = (VersionedUltiStudent) other;
+        VersionedUltiStudent otherVersionedUltiStudent = (VersionedUltiStudent) other;
 
         // state check
-        return super.equals(otherVersionedAddressBook)
-                && addressBookStateList.equals(otherVersionedAddressBook.addressBookStateList)
-                && currentStatePointer == otherVersionedAddressBook.currentStatePointer;
+        return super.equals(otherVersionedUltiStudent)
+                && ultiStudentStateList.equals(otherVersionedUltiStudent.ultiStudentStateList)
+                && currentStatePointer == otherVersionedUltiStudent.currentStatePointer;
     }
 
     /**
@@ -95,7 +95,7 @@ public class VersionedUltiStudent extends UltiStudent {
      */
     public static class NoUndoableStateException extends RuntimeException {
         private NoUndoableStateException() {
-            super("Current state pointer at start of addressBookState list, unable to undo.");
+            super("Current state pointer at start of ultiStudentState list, unable to undo.");
         }
     }
 
@@ -104,7 +104,7 @@ public class VersionedUltiStudent extends UltiStudent {
      */
     public static class NoRedoableStateException extends RuntimeException {
         private NoRedoableStateException() {
-            super("Current state pointer at end of addressBookState list, unable to redo.");
+            super("Current state pointer at end of ultiStudentState list, unable to redo.");
         }
     }
 }
