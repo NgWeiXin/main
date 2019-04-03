@@ -124,7 +124,7 @@ public class UniqueCapEntryList implements Iterable<CapEntry> {
     }
 
     /**
-     * Returns true if {@code capEntryList} contains only unique persons.
+     * Returns true if {@code capEntryList} contains only unique cap entries.
      */
     private boolean capEntryListIsUnique(List<CapEntry> capEntryList) {
         for (int i = 0; i < capEntryList.size() - 1; i++) {

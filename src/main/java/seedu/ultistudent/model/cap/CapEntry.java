@@ -6,7 +6,7 @@ import java.util.Objects;
 
 import seedu.ultistudent.model.modulecode.ModuleCode;
 
-/** Represents a CAP entry for the CAP Manager in the ultistudent book.
+/** Represents a CAP entry for the CAP Manager in the ultistudent.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 
@@ -84,7 +84,7 @@ public class CapEntry {
 
     /**
      * Returns true if both cap entries of the same module code have at least one other identity field that is the same.
-     * This defines a weaker notion of equality between two persons.
+     * This defines a weaker notion of equality between two cap entries.
      */
     public boolean isSameCapEntry(CapEntry otherCapEntry) {
         if (otherCapEntry == this) {

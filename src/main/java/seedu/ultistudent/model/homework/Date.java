@@ -45,7 +45,7 @@ public class Date {
     }
 
     /**
-     * Returns true if both persons have the same deadline.
+     * Returns true if both homework have the same deadline.
      */
     @Override
     public boolean equals(Object other) {

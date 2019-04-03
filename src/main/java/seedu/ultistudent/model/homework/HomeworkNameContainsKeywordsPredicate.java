@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 import seedu.ultistudent.commons.util.StringUtil;
 
 /**
- * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Homework}'s {@code HomeworkName} matches any of the keywords given.
  */
 public class HomeworkNameContainsKeywordsPredicate implements Predicate<Homework> {
     private final List<String> keywords;

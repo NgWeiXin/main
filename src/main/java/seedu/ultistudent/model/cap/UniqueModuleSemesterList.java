@@ -124,7 +124,7 @@ public class UniqueModuleSemesterList implements Iterable<ModuleSemester> {
     }
 
     /**
-     * Returns true if {@code capEntryList} contains only unique persons.
+     * Returns true if {@code capEntryList} contains only unique cap entries.
      */
     private boolean moduleSemesterListIsUnique(List<ModuleSemester> moduleSemesterList) {
         for (int i = 0; i < moduleSemesterList.size() - 1; i++) {

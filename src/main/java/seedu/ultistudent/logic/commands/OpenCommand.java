@@ -34,7 +34,7 @@ public class OpenCommand extends Command {
     private final String manager;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an OpenCommand to initialized the specified {@code manager}
      */
     public OpenCommand(String manager) {
         requireNonNull(manager);
