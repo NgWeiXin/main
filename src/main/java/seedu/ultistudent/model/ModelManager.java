@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.ultistudent.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -23,8 +22,6 @@ import seedu.ultistudent.model.homework.Homework;
 import seedu.ultistudent.model.homework.exceptions.HomeworkNotFoundException;
 import seedu.ultistudent.model.note.Note;
 import seedu.ultistudent.model.note.exceptions.NoteNotFoundException;
-import seedu.ultistudent.model.person.Person;
-import seedu.ultistudent.model.person.exceptions.PersonNotFoundException;
 
 /**
  * Represents the in-memory model of the UltiStudent data.
@@ -32,10 +29,8 @@ import seedu.ultistudent.model.person.exceptions.PersonNotFoundException;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final VersionedUltiStudent versionedAddressBook;
+    private final VersionedUltiStudent versionedUltiStudent;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
-    private final SimpleObjectProperty<Person> selectedPerson = new SimpleObjectProperty<>();
     private final FilteredList<CapEntry> filteredCapEntryList;
     private final SimpleObjectProperty<CapEntry> selectedCapEntry = new SimpleObjectProperty<>();
     private final FilteredList<Homework> filteredHomeworkList;
@@ -46,25 +41,23 @@ public class ModelManager implements Model {
     private final SimpleObjectProperty<ModuleSemester> selectedModuleSemester = new SimpleObjectProperty<>();
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given ultiStudent and userPrefs.
      */
-    public ModelManager(ReadOnlyUltiStudent addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyUltiStudent ultiStudent, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(ultiStudent, userPrefs);
 
-        logger.fine("Initializing with UltiStudent: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with UltiStudent: " + ultiStudent + " and user prefs " + userPrefs);
 
-        versionedAddressBook = new VersionedUltiStudent(addressBook);
+        versionedUltiStudent = new VersionedUltiStudent(ultiStudent);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
-        filteredPersons.addListener(this::ensureSelectedPersonIsValid);
-        filteredCapEntryList = new FilteredList<>(versionedAddressBook.getCapEntryList());
+        filteredCapEntryList = new FilteredList<>(versionedUltiStudent.getCapEntryList());
         filteredCapEntryList.addListener(this::ensureSelectedCapEntryIsValid);
-        filteredHomeworkList = new FilteredList<>(versionedAddressBook.getHomeworkList());
+        filteredHomeworkList = new FilteredList<>(versionedUltiStudent.getHomeworkList());
         filteredHomeworkList.addListener(this::ensureSelectedHomeworkIsValid);
-        filteredNoteList = new FilteredList<>(versionedAddressBook.getNoteList());
+        filteredNoteList = new FilteredList<>(versionedUltiStudent.getNoteList());
         filteredNoteList.addListener(this::ensureSelectedNoteIsValid);
-        filteredModuleSemesterList = new FilteredList<>(versionedAddressBook.getModuleSemesterList());
+        filteredModuleSemesterList = new FilteredList<>(versionedUltiStudent.getModuleSemesterList());
         filteredModuleSemesterList.addListener(this::ensureSelectedModuleSemesterIsValid);
     }
 
@@ -98,162 +91,70 @@ public class ModelManager implements Model {
 
     @Override
     public Path getUltiStudentFilePath() {
-        return userPrefs.getAddressBookFilePath();
+        return userPrefs.getUltiStudentFilePath();
     }
 
     @Override
     public void setUltiStudentFilePath(Path ultiStudentFilePath) {
         requireNonNull(ultiStudentFilePath);
-        userPrefs.setAddressBookFilePath(ultiStudentFilePath);
+        userPrefs.setUltiStudentFilePath(ultiStudentFilePath);
     }
 
-    //=========== UltiStudent ================================================================================
+    //===== UltiStudent =====//
 
     @Override
     public void setUltiStudent(ReadOnlyUltiStudent ultiStudent) {
-        versionedAddressBook.resetData(ultiStudent);
+        versionedUltiStudent.resetData(ultiStudent);
     }
 
     @Override
     public ReadOnlyUltiStudent getUltiStudent() {
-        return versionedAddressBook;
+        return versionedUltiStudent;
     }
 
-    @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return versionedAddressBook.hasPerson(person);
-    }
-
-    @Override
-    public void deletePerson(Person target) {
-        versionedAddressBook.removePerson(target);
-    }
-
-    @Override
-    public void addPerson(Person person) {
-        versionedAddressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-    }
-
-    @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        versionedAddressBook.setPerson(target, editedPerson);
-    }
-
-    //=========== Filtered Person List Accessors =============================================================
-
-    /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
-     */
-    @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
-    }
-
-    @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
-        requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
-    }
-
-    //=========== Undo/Redo =================================================================================
+    //===== Undo/Redo =====//
 
     @Override
     public boolean canUndoUltiStudent() {
-        return versionedAddressBook.canUndo();
+        return versionedUltiStudent.canUndo();
     }
 
     @Override
     public boolean canRedoUltiStudent() {
-        return versionedAddressBook.canRedo();
+        return versionedUltiStudent.canRedo();
     }
 
     @Override
     public void undoUltiStudent() {
-        versionedAddressBook.undo();
+        versionedUltiStudent.undo();
     }
 
     @Override
     public void redoUltiStudent() {
-        versionedAddressBook.redo();
+        versionedUltiStudent.redo();
     }
 
     @Override
     public void commitUltiStudent() {
-        versionedAddressBook.commit();
+        versionedUltiStudent.commit();
     }
 
-    //=========== Selected person ===========================================================================
-
-    @Override
-    public ReadOnlyProperty<Person> selectedPersonProperty() {
-        return selectedPerson;
-    }
-
-    @Override
-    public Person getSelectedPerson() {
-        return selectedPerson.getValue();
-    }
-
-    @Override
-    public void setSelectedPerson(Person person) {
-        if (person != null && !filteredPersons.contains(person)) {
-            throw new PersonNotFoundException();
-        }
-        selectedPerson.setValue(person);
-    }
-
-
-    /**
-     * Ensures {@code selectedPerson} is a valid person in {@code filteredPersons}.
-     */
-    private void ensureSelectedPersonIsValid(ListChangeListener.Change<? extends
-            Person> change) {
-        while (change.next()) {
-            if (selectedPerson.getValue() == null) {
-                // null is always a valid selected person, so we do not need to check that it is valid anymore.
-                return;
-            }
-
-            boolean wasSelectedPersonReplaced = change.wasReplaced() && change.getAddedSize() == change.getRemovedSize()
-                    && change.getRemoved().contains(selectedPerson.getValue());
-            if (wasSelectedPersonReplaced) {
-                // Update selectedPerson to its new value.
-                int index = change.getRemoved().indexOf(selectedPerson.getValue());
-                selectedPerson.setValue(change.getAddedSubList().get(index));
-                continue;
-            }
-
-            boolean wasSelectedPersonRemoved = change.getRemoved().stream()
-                    .anyMatch(removedPerson -> selectedPerson.getValue().isSamePerson(removedPerson));
-            if (wasSelectedPersonRemoved) {
-                // Select the person that came before it in the list,
-                // or clear the selection if there is no such person.
-                selectedPerson.setValue(change.getFrom() > 0 ? change.getList().get(change.getFrom() - 1) : null);
-            }
-        }
-    }
-
-    //====================== CapManager ========================================
+    //===== CapManager =====//
 
     @Override
     public boolean hasCapEntry(CapEntry capEntry) {
         requireNonNull(capEntry);
-        return versionedAddressBook.hasCapEntry(capEntry);
+        return versionedUltiStudent.hasCapEntry(capEntry);
     }
 
     @Override
     public void deleteCapEntry(CapEntry target) {
-        versionedAddressBook.removeCapEntry(target);
+        versionedUltiStudent.removeCapEntry(target);
     }
 
     @Override
     public void addCapEntry(CapEntry capEntry) {
-        versionedAddressBook.addCapEntry(capEntry);
+        versionedUltiStudent.addCapEntry(capEntry);
         updateFilteredCapEntryList(PREDICATE_SHOW_ALL_CAP_ENTRIES);
     }
 
@@ -261,13 +162,9 @@ public class ModelManager implements Model {
     public void setCapEntry(CapEntry target, CapEntry editedCapEntry) {
         requireAllNonNull(target, editedCapEntry);
 
-        versionedAddressBook.setCapEntry(target, editedCapEntry);
+        versionedUltiStudent.setCapEntry(target, editedCapEntry);
     }
 
-    /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
-     */
     @Override
     public ObservableList<CapEntry> getFilteredCapEntryList() {
         return filteredCapEntryList;
@@ -303,14 +200,14 @@ public class ModelManager implements Model {
     private void ensureSelectedCapEntryIsValid(ListChangeListener.Change<? extends CapEntry> change) {
         while (change.next()) {
             if (selectedCapEntry.getValue() == null) {
-                // null is always a valid selected person, so we do not need to check that it is valid anymore.
+                // null is always a valid selected cap entry, so we do not need to check that it is valid anymore.
                 return;
             }
 
             boolean wasSelectedCapEntryReplaced = change.wasReplaced() && change.getAddedSize()
                     == change.getRemovedSize() && change.getRemoved().contains(selectedCapEntry.getValue());
             if (wasSelectedCapEntryReplaced) {
-                // Update selectedPerson to its new value.
+                // Update selectedCapEntry to its new value.
                 int index = change.getRemoved().indexOf(selectedCapEntry.getValue());
                 selectedCapEntry.setValue(change.getAddedSubList().get(index));
                 continue;
@@ -319,28 +216,28 @@ public class ModelManager implements Model {
             boolean wasSelectedCapEntryRemoved = change.getRemoved().stream()
                     .anyMatch(removedCapEntry -> selectedCapEntry.getValue().isSameCapEntry(removedCapEntry));
             if (wasSelectedCapEntryRemoved) {
-                // Select the person that came before it in the list,
-                // or clear the selection if there is no such person.
+                // Select the cap entry that came before it in the list,
+                // or clear the selection if there is no such cap entry.
                 selectedCapEntry.setValue(change.getFrom() > 0 ? change.getList().get(change.getFrom() - 1) : null);
             }
         }
     }
-    //====================== Module Semester List ========================================
+    //===== Module Semester List =====//
 
     @Override
     public boolean hasModuleSemester(ModuleSemester moduleSemester) {
         requireNonNull(moduleSemester);
-        return versionedAddressBook.hasModuleSemester(moduleSemester);
+        return versionedUltiStudent.hasModuleSemester(moduleSemester);
     }
 
     @Override
     public void deleteModuleSemester(ModuleSemester target) {
-        versionedAddressBook.removeModuleSemester(target);
+        versionedUltiStudent.removeModuleSemester(target);
     }
 
     @Override
     public void addModuleSemester(ModuleSemester moduleSemester) {
-        versionedAddressBook.addModuleSemester(moduleSemester);
+        versionedUltiStudent.addModuleSemester(moduleSemester);
         updateFilteredModuleSemesterList(PREDICATE_SHOW_ALL_MODULE_SEMESTERS);
     }
 
@@ -348,13 +245,9 @@ public class ModelManager implements Model {
     public void setModuleSemester(ModuleSemester target, ModuleSemester editedModuleSemester) {
         requireAllNonNull(target, editedModuleSemester);
 
-        versionedAddressBook.setModuleSemester(target, editedModuleSemester);
+        versionedUltiStudent.setModuleSemester(target, editedModuleSemester);
     }
 
-    /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
-     */
     @Override
     public ObservableList<ModuleSemester> getFilteredModuleSemesterList() {
         return filteredModuleSemesterList;
@@ -385,19 +278,19 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Ensures {@code selectedCapEntry} is a valid cap entry in {@code filteredCapEntryList}.
+     * Ensures {@code selectedModuleSemester} is a valid module and semester in {@code filteredModuleSemesterList}.
      */
     private void ensureSelectedModuleSemesterIsValid(ListChangeListener.Change<? extends ModuleSemester> change) {
         while (change.next()) {
             if (selectedModuleSemester.getValue() == null) {
-                // null is always a valid selected person, so we do not need to check that it is valid anymore.
+                // null is always a valid selected ModuleSemester, so we do not need to check that it is valid anymore.
                 return;
             }
 
             boolean wasSelectedModuleSemesterReplaced = change.wasReplaced() && change.getAddedSize()
                     == change.getRemovedSize() && change.getRemoved().contains(selectedModuleSemester.getValue());
             if (wasSelectedModuleSemesterReplaced) {
-                // Update selectedPerson to its new value.
+                // Update selectedModuleSemester to its new value.
                 int index = change.getRemoved().indexOf(selectedModuleSemester.getValue());
                 selectedModuleSemester.setValue(change.getAddedSubList().get(index));
                 continue;
@@ -406,31 +299,30 @@ public class ModelManager implements Model {
             boolean wasSelectedModuleSemsterRemoved = change.getRemoved().stream()
                     .anyMatch(removedModuleSemester -> selectedModuleSemester.getValue().equals(removedModuleSemester));
             if (wasSelectedModuleSemsterRemoved) {
-                // Select the person that came before it in the list,
-                // or clear the selection if there is no such person.
+                // Select the ModuleSemester that came before it in the list,
+                // or clear the selection if there is no such ModuleSemester.
                 selectedModuleSemester.setValue(change.getFrom() > 0 ? change.getList().get(change.getFrom() - 1)
                         : null);
             }
         }
     }
 
-
-    //=============================================== HomeworkManager ===============================================//
+    //===== HomeworkManager =====//
 
     @Override
     public boolean hasHomework(Homework homework) {
         requireNonNull(homework);
-        return versionedAddressBook.hasHomework(homework);
+        return versionedUltiStudent.hasHomework(homework);
     }
 
     @Override
     public void deleteHomework(Homework target) {
-        versionedAddressBook.removeHomework(target);
+        versionedUltiStudent.removeHomework(target);
     }
 
     @Override
     public void addHomework(Homework homework) {
-        versionedAddressBook.addHomework(homework);
+        versionedUltiStudent.addHomework(homework);
         updateFilteredHomeworkList(PREDICATE_SHOW_ALL_HOMEWORK);
     }
 
@@ -438,13 +330,9 @@ public class ModelManager implements Model {
     public void setHomework(Homework target, Homework editedHomework) {
         requireAllNonNull(target, editedHomework);
 
-        versionedAddressBook.setHomework(target, editedHomework);
+        versionedUltiStudent.setHomework(target, editedHomework);
     }
 
-    /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
-     */
     @Override
     public ObservableList<Homework> getFilteredHomeworkList() {
         return filteredHomeworkList;
@@ -475,19 +363,19 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Ensures {@code selectedPerson} is a valid person in {@code filteredPersons}.
+     * Ensures {@code selectedHomework} is a valid homework in {@code filteredHomeworkList}.
      */
     private void ensureSelectedHomeworkIsValid(ListChangeListener.Change<? extends Homework> change) {
         while (change.next()) {
             if (selectedHomework.getValue() == null) {
-                // null is always a valid selected person, so we do not need to check that it is valid anymore.
+                // null is always a valid selected Homework, so we do not need to check that it is valid anymore.
                 return;
             }
 
             boolean wasSelectedHomeworkReplaced = change.wasReplaced() && change.getAddedSize()
                     == change.getRemovedSize() && change.getRemoved().contains(selectedHomework.getValue());
             if (wasSelectedHomeworkReplaced) {
-                // Update selectedPerson to its new value.
+                // Update selectedHomework to its new value.
                 int index = change.getRemoved().indexOf(selectedHomework.getValue());
                 selectedHomework.setValue(change.getAddedSubList().get(index));
                 continue;
@@ -496,28 +384,28 @@ public class ModelManager implements Model {
             boolean wasSelectedHomeworkRemoved = change.getRemoved().stream()
                     .anyMatch(removedHomework -> selectedHomework.getValue().equals(removedHomework));
             if (wasSelectedHomeworkRemoved) {
-                // Select the person that came before it in the list,
-                // or clear the selection if there is no such person.
+                // Select the Homework that came before it in the list,
+                // or clear the selection if there is no such Homework.
                 selectedHomework.setValue(change.getFrom() > 0 ? change.getList().get(change.getFrom() - 1) : null);
             }
         }
     }
 
-    // ======================= Notes Manager ==================================
+    //===== NotesManager =====//
     @Override
     public boolean hasNote(Note note) {
         requireNonNull(note);
-        return versionedAddressBook.hasNote(note);
+        return versionedUltiStudent.hasNote(note);
     }
 
     @Override
     public void deleteNote(Note target) {
-        versionedAddressBook.removeNote(target);
+        versionedUltiStudent.removeNote(target);
     }
 
     @Override
     public void addNote(Note note) {
-        versionedAddressBook.addNote(note);
+        versionedUltiStudent.addNote(note);
         updateFilteredNoteList(PREDICATE_SHOW_ALL_NOTES);
     }
 
@@ -525,15 +413,13 @@ public class ModelManager implements Model {
     public void setNote(Note target, Note editedNote) {
         requireAllNonNull(target, editedNote);
 
-        versionedAddressBook.setNote(target, editedNote);
+        versionedUltiStudent.setNote(target, editedNote);
     }
-
-    //=========== Filtered Note List Accessors =================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Note} backed by the
      * internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedUltiStudent}
      */
 
     @Override
@@ -546,8 +432,6 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredNoteList.setPredicate(predicate);
     }
-
-    //=========== Selected note ==============================================
 
     @Override
     public ReadOnlyProperty<Note> selectedNoteProperty() {
@@ -568,8 +452,7 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Ensures {@code selectedNote} is a valid note in {@code
-     * filteredNoteList}.
+     * Ensures {@code selectedNote} is a valid note in {@code filteredNoteList}.
      */
     private void ensureSelectedNoteIsValid(ListChangeListener.Change<? extends Note> change) {
         while (change.next()) {
@@ -582,7 +465,7 @@ public class ModelManager implements Model {
             boolean wasSelectedNoteReplaced = change.wasReplaced() && change.getAddedSize() == change.getRemovedSize()
                     && change.getRemoved().contains(selectedNote.getValue());
             if (wasSelectedNoteReplaced) {
-                // Update selectedPerson to its new value.
+                // Update selectedNote to its new value.
                 int index = change.getRemoved().indexOf(selectedNote.getValue
                         ());
                 selectedNote.setValue(change.getAddedSubList().get(index));
@@ -593,8 +476,8 @@ public class ModelManager implements Model {
                     .anyMatch(removedNote -> selectedNote.getValue()
                             .isSameNote(removedNote));
             if (wasSelectedNoteRemoved) {
-                // Select the person that came before it in the list,
-                // or clear the selection if there is no such person.
+                // Select the Note that came before it in the list,
+                // or clear the selection if there is no such Note.
                 selectedNote.setValue(change.getFrom() > 0 ? change.getList()
                         .get(change.getFrom() - 1) : null);
             }
@@ -615,11 +498,9 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return versionedAddressBook.equals(other.versionedAddressBook)
+        return versionedUltiStudent.equals(other.versionedUltiStudent)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons)
                 && filteredCapEntryList.equals(other.filteredCapEntryList)
-                && filteredHomeworkList.equals(other.filteredHomeworkList)
-                && Objects.equals(selectedPerson.get(), other.selectedPerson.get());
+                && filteredHomeworkList.equals(other.filteredHomeworkList);
     }
 }
