@@ -32,8 +32,8 @@ public interface ReadOnlyUltiStudent extends Observable {
     ObservableList<Homework> getHomeworkList();
 
     /**
-     * Returns an unmodifiable view of the homework list.
-     * This list will not contain any duplicate homework.
+     * Returns an unmodifiable view of the note list.
+     * This list will not contain any duplicate note.
      */
     ObservableList<Note> getNoteList();
 
