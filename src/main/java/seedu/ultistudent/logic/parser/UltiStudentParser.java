@@ -30,7 +30,6 @@ import seedu.ultistudent.logic.commands.ListCommand;
 import seedu.ultistudent.logic.commands.OpenCommand;
 import seedu.ultistudent.logic.commands.RedoCommand;
 import seedu.ultistudent.logic.commands.SaveNoteCommand;
-import seedu.ultistudent.logic.commands.SelectCommand;
 import seedu.ultistudent.logic.commands.UndoCommand;
 import seedu.ultistudent.logic.parser.exceptions.ParseException;
 
@@ -106,9 +105,6 @@ public class UltiStudentParser {
         //===== Other useful Commands in UltiStudent =====//
         case SaveNoteCommand.COMMAND_WORD:
             return new SaveNoteCommand();
-
-        case SelectCommand.COMMAND_WORD:
-            return new SelectCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();

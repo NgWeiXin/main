@@ -32,7 +32,6 @@ import seedu.ultistudent.commons.core.index.Index;
 import seedu.ultistudent.logic.commands.ClearCommand;
 import seedu.ultistudent.logic.commands.FindCommand;
 import seedu.ultistudent.logic.commands.ListCommand;
-import seedu.ultistudent.logic.commands.SelectCommand;
 import seedu.ultistudent.model.UltiStudent;
 import seedu.ultistudent.model.Model;
 import seedu.ultistudent.testutil.TypicalPersons;

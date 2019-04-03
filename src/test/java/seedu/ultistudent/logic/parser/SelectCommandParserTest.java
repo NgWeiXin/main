@@ -7,8 +7,6 @@ import static seedu.ultistudent.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.Test;
 
-import seedu.ultistudent.logic.commands.SelectCommand;
-
 /**
  * Test scope: similar to {@code DeleteCommandParserTest}.
  * @see DeleteCommandParserTest

@@ -14,7 +14,7 @@ public class EditNoteCommandParser implements Parser<EditNoteCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditNoteCommand
-     * and returns an SelectCommand object for execution.
+     * and returns an EditNoteCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditNoteCommand parse(String args) throws ParseException {

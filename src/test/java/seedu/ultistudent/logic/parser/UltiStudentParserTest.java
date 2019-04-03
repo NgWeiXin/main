@@ -21,7 +21,6 @@ import seedu.ultistudent.logic.commands.HelpCommand;
 import seedu.ultistudent.logic.commands.HistoryCommand;
 import seedu.ultistudent.logic.commands.ListCommand;
 import seedu.ultistudent.logic.commands.RedoCommand;
-import seedu.ultistudent.logic.commands.SelectCommand;
 import seedu.ultistudent.logic.commands.UndoCommand;
 import seedu.ultistudent.logic.parser.exceptions.ParseException;
 import seedu.ultistudent.model.person.NameContainsKeywordsPredicate;
