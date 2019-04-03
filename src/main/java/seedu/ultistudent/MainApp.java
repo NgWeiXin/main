@@ -15,18 +15,18 @@ import seedu.ultistudent.commons.util.ConfigUtil;
 import seedu.ultistudent.commons.util.StringUtil;
 import seedu.ultistudent.logic.Logic;
 import seedu.ultistudent.logic.LogicManager;
-import seedu.ultistudent.model.UltiStudent;
 import seedu.ultistudent.model.Model;
 import seedu.ultistudent.model.ModelManager;
 import seedu.ultistudent.model.ReadOnlyUltiStudent;
 import seedu.ultistudent.model.ReadOnlyUserPrefs;
+import seedu.ultistudent.model.UltiStudent;
 import seedu.ultistudent.model.UserPrefs;
 import seedu.ultistudent.model.util.SampleDataUtil;
 import seedu.ultistudent.storage.JsonUltiStudentStorage;
-import seedu.ultistudent.storage.UltiStudentStorage;
 import seedu.ultistudent.storage.JsonUserPrefsStorage;
 import seedu.ultistudent.storage.Storage;
 import seedu.ultistudent.storage.StorageManager;
+import seedu.ultistudent.storage.UltiStudentStorage;
 import seedu.ultistudent.storage.UserPrefsStorage;
 import seedu.ultistudent.ui.Ui;
 import seedu.ultistudent.ui.UiManager;
@@ -36,7 +36,7 @@ import seedu.ultistudent.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 6, 0, true);
+    public static final Version VERSION = new Version(1, 3, 1, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -74,14 +74,14 @@ public class MainApp extends Application {
      * or an empty UltiStudent will be used instead if errors occur when reading {@code storage}'s UltiStudent.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyUltiStudent> addressBookOptional;
+        Optional<ReadOnlyUltiStudent> ultiStudentOptional;
         ReadOnlyUltiStudent initialData;
         try {
-            addressBookOptional = storage.readUltiStudent();
-            if (!addressBookOptional.isPresent()) {
+            ultiStudentOptional = storage.readUltiStudent();
+            if (!ultiStudentOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample UltiStudent");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleUltiStudent);
+            initialData = ultiStudentOptional.orElseGet(SampleDataUtil::getSampleUltiStudent);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty UltiStudent");
             initialData = new UltiStudent();

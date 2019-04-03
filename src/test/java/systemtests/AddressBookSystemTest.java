@@ -33,7 +33,6 @@ import seedu.ultistudent.logic.commands.ClearCommand;
 import seedu.ultistudent.model.UltiStudent;
 import seedu.ultistudent.model.Model;
 import seedu.ultistudent.testutil.TypicalPersons;
-import seedu.ultistudent.ui.BrowserPanel;
 import seedu.ultistudent.ui.CommandBox;
 
 /**

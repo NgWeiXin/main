@@ -7,7 +7,7 @@ import javafx.scene.layout.Region;
 import seedu.ultistudent.model.homework.Homework;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code Homework}.
  */
 public class HomeworkCard extends UiPart<Region> {
 

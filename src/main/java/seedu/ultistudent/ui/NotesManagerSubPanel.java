@@ -14,7 +14,7 @@ import seedu.ultistudent.commons.core.LogsCenter;
 import seedu.ultistudent.model.note.Note;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of {@code Note}.
  */
 public class NotesManagerSubPanel extends UiPart<Region> {
     private static final String FXML = "NotesManagerSubPanel.fxml";
@@ -30,13 +30,13 @@ public class NotesManagerSubPanel extends UiPart<Region> {
         notesListView.setItems(notesList);
         notesListView.setCellFactory(listView -> new NotesListViewCell());
         notesListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            logger.fine("Selection in person list panel changed to : '" + newValue + "'");
+            logger.fine("Selection in note list panel changed to : '" + newValue + "'");
             onSelectedNoteChange.accept(newValue);
         });
         selectedNote.addListener((observable, oldValue, newValue) -> {
-            logger.fine("Selected person changed to: " + newValue);
+            logger.fine("Selected note changed to: " + newValue);
 
-            // Don't modify selection if we are already selecting the selected person,
+            // Don't modify selection if we are already selecting the selected note,
             // otherwise we would have an infinite loop.
             if (Objects.equals(notesListView.getSelectionModel().getSelectedItem(), newValue)) {
                 return;
@@ -53,7 +53,7 @@ public class NotesManagerSubPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Note} using a {@code NoteCard}.
      */
     class NotesListViewCell extends ListCell<Note> {
         @Override

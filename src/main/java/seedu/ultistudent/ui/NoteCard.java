@@ -7,7 +7,7 @@ import javafx.scene.layout.Region;
 import seedu.ultistudent.model.note.Note;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code Note}.
  */
 public class NoteCard extends UiPart<Region> {
 

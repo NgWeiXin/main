@@ -14,7 +14,7 @@ import seedu.ultistudent.commons.core.LogsCenter;
 import seedu.ultistudent.model.cap.ModuleSemester;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of {@code ModuleSemester}.
  */
 public class CapManagerSubPanel extends UiPart<Region> {
     private static final String FXML = "CapManagerSubPanel.fxml";
@@ -31,13 +31,13 @@ public class CapManagerSubPanel extends UiPart<Region> {
         moduleSemesterListView.setCellFactory(listView -> new ModuleSemesterListViewCell());
         moduleSemesterListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
-                    logger.fine("Selection in person list panel changed to : '" + newValue + "'");
+                    logger.fine("Selection in ModuleSemester list panel changed to : '" + newValue + "'");
                     onSelectedModuleSemesterChange.accept(newValue);
                 });
         selectedModuleSemester.addListener((observable, oldValue, newValue) -> {
-            logger.fine("Selected person changed to: " + newValue);
+            logger.fine("Selected ModuleSemester changed to: " + newValue);
 
-            // Don't modify selection if we are already selecting the selected person,
+            // Don't modify selection if we are already selecting the selected ModuleSemester,
             // otherwise we would have an infinite loop.
             if (Objects.equals(moduleSemesterListView.getSelectionModel().getSelectedItem(), newValue)) {
                 return;
@@ -54,7 +54,7 @@ public class CapManagerSubPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code ModuleSemester} using a {@code ModuleSemesterCard}.
      */
     class ModuleSemesterListViewCell extends ListCell<ModuleSemester> {
         @Override

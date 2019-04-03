@@ -14,7 +14,7 @@ import seedu.ultistudent.commons.core.LogsCenter;
 import seedu.ultistudent.model.homework.Homework;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of {@code Homework}.
  */
 public class HomeworkManagerMainPanel extends UiPart<Region> {
     private static final String FXML = "HomeworkManagerMainPanel.fxml";
@@ -36,7 +36,7 @@ public class HomeworkManagerMainPanel extends UiPart<Region> {
         selectedHomework.addListener((observable, oldValue, newValue) -> {
             logger.fine("Selected homework changed to: " + newValue);
 
-            // Don't modify selection if we are already selecting the selected person,
+            // Don't modify selection if we are already selecting the selected homework,
             // otherwise we would have an infinite loop.
             if (Objects.equals(homeworkListView.getSelectionModel().getSelectedItem(), newValue)) {
                 return;

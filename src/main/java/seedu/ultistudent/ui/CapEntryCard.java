@@ -7,7 +7,7 @@ import javafx.scene.layout.Region;
 import seedu.ultistudent.model.cap.CapEntry;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code CapEntry}.
  */
 public class CapEntryCard extends UiPart<Region> {
 
