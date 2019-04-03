@@ -107,12 +107,6 @@ public class UltiStudentParser {
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
-
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
-
         case ListCapEntryCommand.COMMAND_WORD:
             return new ListCapEntryCommand();
 
@@ -133,7 +127,6 @@ public class UltiStudentParser {
 
         case OpenCommand.COMMAND_WORD:
             return new OpenCommandParser().parse(arguments);
-
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

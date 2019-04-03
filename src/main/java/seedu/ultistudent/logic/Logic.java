@@ -14,7 +14,6 @@ import seedu.ultistudent.model.cap.CapEntry;
 import seedu.ultistudent.model.cap.ModuleSemester;
 import seedu.ultistudent.model.homework.Homework;
 import seedu.ultistudent.model.note.Note;
-import seedu.ultistudent.model.person.Person;
 
 /**
  * API of the Logic component
@@ -34,10 +33,7 @@ public interface Logic {
      *
      * @see seedu.ultistudent.model.Model#getUltiStudent()
      */
-    ReadOnlyUltiStudent getAddressBook();
-
-    /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Person> getFilteredPersonList();
+    ReadOnlyUltiStudent getUltiStudent();
 
     ObservableList<Homework> getFilteredHomeworkList();
 
@@ -50,7 +46,7 @@ public interface Logic {
     /**
      * Returns the user prefs' UltiStudent file path.
      */
-    Path getAddressBookFilePath();
+    Path getUltiStudentFilePath();
 
     /**
      * Returns the user prefs' GUI settings.
@@ -62,34 +58,12 @@ public interface Logic {
      */
     void setGuiSettings(GuiSettings guiSettings);
 
-    /**
-     * Selected person in the filtered person list.
-     * null if no person is selected.
-     *
-     * @see seedu.ultistudent.model.Model#selectedPersonProperty()
-     */
-    ReadOnlyProperty<Person> selectedPersonProperty();
-
     ReadOnlyProperty<Homework> selectedHomeworkProperty();
-
-    /**
-     * Sets the selected person in the filtered person list.
-     *
-     * @see seedu.ultistudent.model.Model#setSelectedPerson(Person)
-     */
-    void setSelectedPerson(Person person);
-
 
     // CapEntry
     /** Returns an unmodifiable view of the filtered list of cap entries */
     ObservableList<CapEntry> getFilteredCapEntryList();
 
-    /**
-     * Selected cap entry in the filtered cap entry list.
-     * null if no cap entry is selected.
-     *
-     * @see seedu.ultistudent.model.Model#selectedPersonProperty()
-     */
     ReadOnlyProperty<CapEntry> selectedCapEntryProperty();
 
     // ModuleSemester
@@ -105,15 +79,10 @@ public interface Logic {
     ReadOnlyProperty<ModuleSemester> selectedModuleSemesterProperty();
 
     // Note
-    /** Returns an unmodifiable view of the filtered list of notes.*/
-    ObservableList<Note> getFilteredNoteList();
-    /**
-     * Selected note in the filtered note list.
-     * null if no note is selected.
-     *
-     * @see seedu.ultistudent.model.Model#selectedPersonProperty()
-     */
+
     ReadOnlyProperty<Note> selectedNoteProperty();
+
+    ObservableList<Note> getFilteredNoteList();
 
     /**
      * Sets the selected cap entry in the filtered cap entry list.
