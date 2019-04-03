@@ -6,46 +6,59 @@ import java.util.stream.Collectors;
 
 import seedu.ultistudent.model.UltiStudent;
 import seedu.ultistudent.model.ReadOnlyUltiStudent;
-import seedu.ultistudent.model.person.Address;
-import seedu.ultistudent.model.person.Email;
-import seedu.ultistudent.model.person.Name;
-import seedu.ultistudent.model.person.Person;
-import seedu.ultistudent.model.person.Phone;
+import seedu.ultistudent.model.cap.CapEntry;
+import seedu.ultistudent.model.cap.ModuleCredits;
+import seedu.ultistudent.model.cap.ModuleGrade;
+import seedu.ultistudent.model.cap.ModuleSemester;
+import seedu.ultistudent.model.homework.Date;
+import seedu.ultistudent.model.homework.Homework;
+import seedu.ultistudent.model.homework.HomeworkName;
+import seedu.ultistudent.model.modulecode.ModuleCode;
+import seedu.ultistudent.model.note.Content;
+import seedu.ultistudent.model.note.Note;
+import seedu.ultistudent.model.note.NoteName;
 import seedu.ultistudent.model.tag.Tag;
 
 /**
  * Contains utility methods for populating {@code UltiStudent} with sample data.
  */
 public class SampleDataUtil {
-    public static Person[] getSamplePersons() {
-        return new Person[] {
-            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Address("Blk 30 Geylang Street 29, #06-40"),
-                getTagSet("friends")),
-            new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getTagSet("colleagues", "friends")),
-            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getTagSet("neighbours")),
-            new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet("family")),
-            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Address("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet("classmates")),
-            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"))
+
+
+    public static Homework[] getSampleHomework() {
+        return new Homework[] {
+            new Homework(new ModuleCode("CS2030"), new HomeworkName("Tutorial 1"), new Date("20/04/2019"))
+            //TODO: add 2 or 3 more homeworks
         };
     }
 
-    public static ReadOnlyUltiStudent getSampleAddressBook() {
-        UltiStudent sampleAb = new UltiStudent();
-        for (Person samplePerson : getSamplePersons()) {
-            sampleAb.addPerson(samplePerson);
+    public static Note[] getSampleNote() {
+        return new Note[] {
+            new Note(new ModuleCode("CS2103T"), new NoteName("My First Lesson"), new Content("Hello World"))
+            //TODO: add 2 or 3 more notes
+        };
+    }
+
+    public static CapEntry[] getSampleCapEntry() {
+        return new CapEntry[] {
+            new CapEntry(new ModuleCode("CS1101S"), new ModuleGrade("A"), new ModuleCredits("4"),
+                    new ModuleSemester("Y1S1"))
+                    //TODO: add 2 or 3 more cap entries
+        };
+    }
+
+    public static ReadOnlyUltiStudent getSampleUltiStudent() {
+        UltiStudent sampleUltiStudent = new UltiStudent();
+        for (Homework sampleHomework : getSampleHomework()) {
+            sampleUltiStudent.addHomework(sampleHomework);
         }
-        return sampleAb;
+        for (Note sampleNote : getSampleNote()) {
+            sampleUltiStudent.addNote(sampleNote);
+        }
+        for (CapEntry sampleCapEntry : getSampleCapEntry()) {
+            sampleUltiStudent.addCapEntry(sampleCapEntry);
+        }
+        return sampleUltiStudent;
     }
 
     /**
